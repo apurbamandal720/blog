@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blog</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body onload="data();">
+    <div class="cont">
+
+        <div class="top-head">
+            <center> {% if request.user.username %} <h3>Welcome {{request.user}} 
+                <a href="api/logout/" class="aa"> <button class="logout" onclick="" style="width:auto;">  Logout</button></a>
+            </h3>
+                {% else %}
+                <button onclick="document.getElementById('id01').style.display='block'"
+                    style="width:auto;">Registration</button>
+                <button onclick="document.getElementById('id02').style.display='block'"
+                    style="width:auto;">Login</button>
+                    {% endif %}
+                </center>
+        </div>
+        
+        <div id="id01" class="modal">
+
+            <div class="modal-content animate">
+                <!-- {% csrf_token %} -->
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                        title="Close Modal">&times;</span>
+
+                </div>
+
+                <div class="container">
+                    <label for="uname"><b>First name</b></label>
+                    <input type="text" placeholder="Enter first name" id="id_first_name" required>
+                    <label for="uname"><b>Last name</b></label>
+                    <input type="text" placeholder="Enter last name" id="id_last_name" required>
+                    <label for="uname"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Your Email" id="id_email" required>
+
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" id="id_password" required>
+                    <label for="psw"><b>Confirm Password</b></label>
+                    <input type="password" placeholder="Enter Confirm Password" id="id_con_password" required>
+
+                    <button type="submit" onclick="registration();">Registration</button>
+
+                </div>
+
+                <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                        class="cancelbtn">Cancel</button>
+                    <span class="psw">Forgot <a href="#">password?</a></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="id02" class="modal">
+
+            <div class="modal-content animate">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id02').style.display='none'" class="close"
+                        title="Close Modal">&times;</span>
+
+                </div>
+
+                <div class="container">
+                    <label for="uname"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" id="id_log_email" required>
+
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" id="id_log_password" required>
+
+                    <button type="submit" onclick="login();">Login</button>
+
+                </div>
+
+                <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('id02').style.display='none'"
+                        class="cancelbtn">Cancel</button>
+                    <span class="psw">Forgot <a href="#">password?</a></span>
+                </div>
+            </div>
+        </div>
+
+        
+        
+        {% if request.user.username %}
+        <button onclick="document.getElementById('id03').style.display='block'">Create new Blog</button>{%endif%}
+            <br><br>
+        <div id="id03" class="modal">
+
+            <div class="modal-content animate">
+                <!-- {% csrf_token %} -->
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id03').style.display='none'" class="close"
+                        title="Close Modal">&times;</span>
+
+                </div>
+
+                <div class="container">
+                    <label for="uname"><b>Title</b></label>
+                    <input type="text" placeholder="Enter title" id="id_title" required>
+
+                    <label for="psw"><b>Content</b></label>
+                    <textarea id="id_content" class="content" rows="4" cols="50" placeholder="Enter content"> </textarea>
+                    <label for="psw"><b>Is published </b></label>
+                    <input type="radio"   name="published" value="True" style="width: 100px;" checked>  Yes
+                    <input type="radio"  name="published" value="False" style="width: 100px;">  No
+                    
+                    <button type="submit" onclick="add();">Add New</button>
+
+                </div>
+
+                <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('id03').style.display='none'"
+                        class="cancelbtn">Cancel</button>
+                    <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
+                </div>
+            </div>
+        </div>
+        {% if request.user.username %}
+        <h2 class="blog">Your all blog</h2>
+        <div class="row" id="user_data">
+            
+        </div>
+        {% endif %}
+        <h2 class="blog">All blog</h2>
+        <div class="row" id="blog_data">
+            
+          </div>
+    </div>
+    <script>
+
+    </script>
+    <script src="{% static 'js/all_custom.js' %}"></script>
+</body>
+
+</html>
